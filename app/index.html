@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover Studio — GTA-style cover art maker</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23ff5e8a'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+  <section class="controls" aria-label="Cover controls">
+    <header>
+      <h1>Vice Cover Studio</h1>
+      <p>Your photos, a caption, and a sunset — turned into poster cover art. Three steps: load photos, tap a panel, export a PNG.</p>
+    </header>
+
+    <section class="group">
+      <h2>1 · Photos</h2>
+      <label class="file-label">Load photos from your machine
+        <input id="photo" type="file" accept="image/*" multiple>
+      </label>
+      <div class="row">
+        <button id="samples" type="button">Use sample photos</button>
+        <button id="fillAll" type="button">Fill all panels</button>
+      </div>
+      <p class="hint">Photos stay on your machine — nothing is uploaded.</p>
+      <div id="strip" class="strip" aria-label="Loaded photos"></div>
+    </section>
+
+    <section class="group">
+      <h2>2 · Panels &amp; crop</h2>
+      <div id="dots" class="dots" aria-label="Choose a panel"></div>
+      <p id="panelLabel" class="hint">Panel 1 of 4</p>
+      <p class="hint">Tap a panel on the cover, then drag it to move the photo and scroll to zoom. Tap a photo above to put it in the selected panel.</p>
+      <label>Zoom <span id="zoomVal">100%</span>
+        <input id="zoom" type="range" min="1" max="3" step="0.05" value="1">
+      </label>
+      <label>Move left / right <span id="panxVal">0</span>
+        <input id="panx" type="range" min="-60" max="60" step="1" value="0">
+      </label>
+      <label>Move up / down <span id="panyVal">0</span>
+        <input id="pany" type="range" min="-60" max="60" step="1" value="0">
+      </label>
+      <h3>Layout</h3>
+      <div id="layouts" class="chips"></div>
+      <h3>Colour grade</h3>
+      <div id="grades" class="chips"></div>
+    </section>
+
+    <section class="group">
+      <h2>3 · Caption</h2>
+      <label>Title
+        <input id="title" type="text" maxlength="30" value="Sunset Heist">
+      </label>
+      <label>Subtitle
+        <input id="subtitle" type="text" maxlength="48" value="VICE BOULEVARD • EST. TONIGHT">
+      </label>
+      <label>Title size <span id="titleSizeVal">100%</span>
+        <input id="titleSize" type="range" min="0.6" max="1.4" step="0.05" value="1">
+      </label>
+      <label>Preview size
+        <select id="size">
+          <option value="1080x1080">Square 1080 × 1080</option>
+          <option value="1080x1350">Portrait 1080 × 1350</option>
+          <option value="1920x1080">Wide 1920 × 1080</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="group export">
+      <h2>Export PNG</h2>
+      <div class="row">
+        <button data-export="1080x1080" type="button">Square</button>
+        <button data-export="1080x1350" type="button">Portrait</button>
+        <button data-export="1920x1080" type="button">Wide</button>
+      </div>
+      <p id="status" role="status"></p>
+    </section>
+  </section>
+
+  <section class="preview" aria-label="Cover preview">
+    <canvas id="cover" width="1080" height="1080"></canvas>
+    <p class="hint">Live preview — what you see is what the PNG looks like.</p>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
